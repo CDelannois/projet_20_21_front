@@ -1,0 +1,32 @@
+#button-cancel-edit-membre,
+#button-cancel-edit-jeu,
+#container-form-membre,
+#container-form-jeu,
+#button-display-membre,
+#jeux-table,
+#membre-jeux-table,
+#appartient,
+#button-add-jeu {
+    display: none;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+}
+
+.table {
+    color: azure;
+}
+
+#jeu-detail-table {
+    text-align: center;
+}
+
+#details-list td {
+    border-style: hidden;
+}
+
+#title-list-membre-jeux {
+    padding-left: 3%;
+    color: azure;
+}
