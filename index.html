@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeux de société</title>
+  <link rel="stylesheet" href="dist/css/vendor.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<!--Boutons-->
+<div class="row">
+  <div class="col-12">
+    <div class="text-right p-4">
+      <button class="btn btn-success" id="button-add-membre" onclick="edition.showFormMembre()">Ajouter un
+        membre</button>
+      <button class="btn btn-success" id="button-add-jeu" onclick="edition.showFormJeu()">Ajouter un jeu
+        <button class="btn btn-danger" id="button-cancel-edit-membre"
+          onclick="edition.hideFormMembre()">Annuler</button>
+        <button class="btn btn-danger" id="button-cancel-edit-jeu" onclick="edition.hideFormJeu()">Annuler</button>
+        <button class="btn btn-info" id="button-display-jeux" onclick="display.showJeux()">Jeux</button>
+        <button class="btn btn-info" id="button-display-membre" onclick="display.showMembre()">Membres</button>
+    </div>
+  </div>
+</div>
+
+
+<!--Formulaire pour ajouter un membre-->
+<div class="row mb-4" id="container-form-membre">
+  <div class="col-8 offset-2">
+    <div class="card">
+      <div class="card-header">
+        Ajouter un membre
+      </div>
+      <div class="card-body">
+        <form>
+          <input type="hidden" name="id_membre" id="id_membre" required>
+
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" id="nom" maxlength="45" placeholder="Nom du nouveau membre"
+              required>
+            <div id="erreur-alpha-nom"></div>
+            <div id="erreur-length-nom"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input type="text" class="form-control" id="prenom" maxlength="45" placeholder="Prénom du nouveau membre"
+              required>
+            <div id="erreur-alpha-prenom"></div>
+            <div id="erreur-length-prenom"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="telephone">Numéro de téléphone</label>
+            <input type="text" class="form-control" id="telephone" maxlength="45"
+              placeholder="Numéro de téléphone du nouveau membre" required>
+            <div id="erreur-int-telephone"></div>
+            <div id="erreur-length-telephone"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Adresse mail</label>
+            <input type="email" class="form-control" id="email" maxlength="45"
+              placeholder="Adresse mail du nouveau membre" required>
+            <div id="erreur-is-email"></div>
+            <div id="erreur-length-email"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="adresse">Adresse (numéro, rue et ville)</label>
+            <input type="text" class="form-control" id="adresse" maxlength="200" placeholder="Numéro, rue et ville"
+              required>
+            <div id="erreur-alpha-adresse"></div>
+            <div id="erreur-length-adresse"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="date_naissance">Date de naissance</label>
+            <input type="date" class="form-control" id="date_naissance" required>
+            <div id="erreur-date-naissance"></div>
+          </div>
+
+          <button type="submit" id="saveMembre" onclick="edition.saveMembre(event)"
+            class="btn btn-primary">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Formulaire pour ajouter un jeu-->
+<div class="row mb-4" id="container-form-jeu">
+  <div class="col-8 offset-2">
+    <div class="card">
+      <div class="card-header">
+        Ajouter un jeu
+      </div>
+      <div class="card-body">
+        <form>
+          <input type="hidden" name="id_jeux" id="id_jeux" required>
+
+          <div class="form-group">
+            <label for="titre">Titre</label>
+            <input type="text" class="form-control" id="titre" maxlength="45" placeholder="Titre du nouveau jeu">
+            <div id="erreur-length-titre"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="joueurs_min">Nombre minimum de joueurs</label>
+            <input type="text" class="form-control" id="joueurs_min" required>
+            <div id="erreur-int-min"></div>
+            <div id="erreur-value-min"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="joueurs_max">Nombre maximum de joueurs</label>
+            <input type="text" class="form-control" id="joueurs_max" required>
+            <div id="erreur-int-max"></div>
+            <div id="erreur-value-max"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="duree">Durée moyenne du jeu en minutes</label>
+            <input type="text" class="form-control" id="duree" placeholder="En minutes">
+            <div id="erreur-int-duree"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="age_recommande">Age recommandé pour jouer</label>
+            <input type="text" class="form-control" id="age_recommande">
+            <div id="erreur-int-age"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="mecanisme">Mecanisme principal du jeu</label>
+            <input type="text" class="form-control" id="mecanisme" maxlength="45" placeholder="Exemple: draft">
+            <div id="erreur-alpha-mecanisme"></div>
+            <div id="erreur-length-mecanisme"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="mecanisme2">Mecanisme secondaire du jeu (facultatif)</label>
+            <input type="text" class="form-control" id="mecanisme2" maxlength="45" placeholder="Exemple: bluff">
+            <div id="erreur-alpha-mecanisme2"></div>
+            <div id="erreur-length-mecanisme2"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="date_parution">Date de la parution du jeu</label>
+            <input type="date" class="form-control" id="date_parution">
+            <div id="erreur-date-parution"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="editeur">Editeur</label>
+            <input type="text" class="form-control" id="editeur" maxlength="45" placeholder="Exemple: Iello">
+            <div id="erreur-length-editeur"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="commentaire">Commentaire sur l'état du jeu (facultatif)</label>
+            <textarea class="form-control" id="commentaire" maxlength="200"></textarea>
+            <div id="caracteresRestant">200 caractères maximum</div>
+            <div id="erreur-length-commentaire"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="appartient">Membre</label>
+            <select id="jeuAppartient" name="jeuAppartient" class="form-control">
+
+            </select>
+          </div>
+
+          <button type="submit" id="saveJeu" onclick="edition.saveJeu(event)" class="btn btn-primary">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Affichage des membres-->
+
+<body>
+  <div class="row" id="membre-table">
+    <div class="col-12">
+      <table id="list-membres" class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Date de naissance</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--Modal de suppression des membres-->
+  <div class="modal fade" id="remove-membre-modal" tabindex="-1" aria-labelledby="remove-membre-modal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Suppression d'un membre</h5>
+        </div>
+        <div class="modal-body">
+          Voulez-vous vraiment supprimer ce membre?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" onclick="listMembre.remove()">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal d'erreur de suppression d'un membre-->
+  <div class="modal fade" id="remove-error-modal" tabindex="-1" aria-labelledby="remove-error-modal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Suppression impossible</h5>
+        </div>
+        <div class="modal-body">
+          Impossible de supprimer ce membre, il possède encore des jeux.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Affichage des jeux-->
+  <div class="row" id="jeux-table">
+    <div class="col-12">
+      <table id="list-jeux" class="table">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Joueurs minimum</th>
+            <th>Joueurs maximum</th>
+            <th>Durée (minutes)</th>
+            <th>Age minimum</th>
+            <th>Mecanisme 1</th>
+            <th>Mecanisme 2</th>
+            <th>Editeur</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--Modal de suppression des jeux-->
+  <div class="modal fade" id="remove-jeu-modal" tabindex="-1" aria-labelledby="remove-jeu-modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Suppression d'un jeu</h5>
+        </div>
+        <div class="modal-body">
+          Voulez-vous vraiment supprimer ce jeu?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" onclick="listJeux.remove()">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Tableau des jeux d'un membre-->
+  <div class="row" id="membre-jeux-table">
+    <h1 id='title-list-membre-jeux'>
+      <!--Afficher le nom du joueur auquel appartiennent les jeux-->
+    </h1>
+    <div class="col-12">
+      <table id="list-membre-jeux" class="table">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Joueurs minimum</th>
+            <th>Joueurs maximum</th>
+            <th>Durée (minutes)</th>
+            <th>Age minimum</th>
+            <th>Mecanisme 1</th>
+            <th>Mecanisme 2</th>
+            <th>Editeur</th>
+          </tr>
+        </thead>
+        <tbody id="body-list-membre-jeux">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--Affichage d'un jeu-->
+  <div class="row" id="jeu-detail-table">
+    <div class="col-12">
+      <table id="details-list" class="table">
+        <tbody id="body-details-list">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="dist/js/vendor.js"></script>
+  <script type="text/javascript" src="dist/js/app.js"></script>
+</body>
+
+</html>
