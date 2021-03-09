@@ -1,4 +1,4 @@
-let api = "charles-boardgame-api.herokuapp.com";
+let api = "https://charles-boardgame-api.herokuapp.com";
 //_________________________________________________________________________________MEMBRES______________________________________________________________________________________________
 
 //Déclaration des variables
