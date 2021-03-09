@@ -106,7 +106,7 @@ listJeux.jeuDetail = async (jeuID) => {
 
 //Récupération des jeux
 listJeux.getJeux = (jeuID) => {
-    let url = api + 'http://localhost:3000/jeux';
+    let url = api + '/jeux';
 
     //Si on a l'ID d'un jeu, on affiche les détails de celui-ci.
     if (jeuID) {
