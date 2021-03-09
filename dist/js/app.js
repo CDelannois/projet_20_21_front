@@ -1,5 +1,5 @@
+let api = "charles-boardgame-api.herokuapp.com";
 //_________________________________________________________________________________MEMBRES______________________________________________________________________________________________
-
 
 //Déclaration des variables
 const listMembre = {};
@@ -13,7 +13,7 @@ listMembre.init = async () => {
 listMembre.getMembre = () => {
     return jQuery
         .ajax({
-            url: 'http://localhost:3000/membre',
+            url: api + '/membre',
             method: 'GET'
         })
         .catch((error) => {
@@ -39,7 +39,7 @@ listMembre.remove = async () => {
         } else {
             await jQuery
                 .ajax({
-                    url: `http://localhost:3000/membre/${membreId}`,
+                    url: api + `/membre/${membreId}`,
                     method: "DELETE",
                 });
             $(`[data-id="${membreId}"]`).fadeOut('slow');
@@ -106,7 +106,7 @@ listJeux.jeuDetail = async (jeuID) => {
 
 //Récupération des jeux
 listJeux.getJeux = (jeuID) => {
-    let url = 'http://localhost:3000/jeux';
+    let url = api + 'http://localhost:3000/jeux';
 
     //Si on a l'ID d'un jeu, on affiche les détails de celui-ci.
     if (jeuID) {
@@ -136,7 +136,7 @@ listJeux.remove = async () => {
     try {
         await jQuery
             .ajax({
-                url: `http://localhost:3000/jeux/${jeuId}`,
+                url: api + `/jeux/${jeuId}`,
                 method: "DELETE",
             });
         $(`[data-id="${jeuId}"]`).fadeOut('slow');
@@ -225,7 +225,7 @@ listMembreJeux.init = async (membreId) => {
 listMembreJeux.getMembreJeux = (membreId) => {
     return jQuery
         .ajax({
-            url: `http://localhost:3000/membreJeux/${membreId}`,
+            url: api + `/membreJeux/${membreId}`,
             method: 'GET'
         })
         .catch((error) => {
@@ -370,7 +370,7 @@ edition.saveMembre = async (event) => {
     const adresse = $('#adresse').val();
     const date_naissance = $('#date_naissance').val();
 
-    let url = 'http://localhost:3000/membre';
+    let url = api + '/membre';
 
     if (isEdition) {
         url += `/${id}`;
@@ -409,7 +409,7 @@ edition.init = async () => {
 edition.getMembres = () => {
     return jQuery
         .ajax({
-            url: 'http://localhost:3000/membre',
+            url: api + '/membre',
             method: 'GET'
         })
         .catch((error) => {
@@ -545,7 +545,7 @@ edition.saveJeu = async () => {
     event.preventDefault(); //Arrêter l'exécution de l'envoi
 
 
-    let url = 'http://localhost:3000/jeux';
+    let url = api + '/jeux';
 
     if (isEdition) {
         url += `/${id}`;
